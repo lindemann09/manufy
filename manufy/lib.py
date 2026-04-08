@@ -68,10 +68,11 @@ def course_manual(settings: Settings,
             fdb_topic += f"{fb}\n"
         else:
             # no a topic file -> make link
-            try:
-                dest.symlink_to(man_doc.filename.absolute())
-            except FileExistsError:
-                pass
+            if not man_doc.filename.name.startswith((".", "_")):
+                try:
+                    dest.symlink_to(man_doc.filename.absolute())
+                except FileExistsError:
+                    pass
 
     if len(fdb_topic) > 0:
         print(fdb_topic)

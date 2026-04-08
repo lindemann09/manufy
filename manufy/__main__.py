@@ -50,7 +50,7 @@ def cli():
         description=f"make_manuals {__version__}: {DESC}",
         epilog=f"(c) {__author__}")
 
-    parser.add_argument("TOML", help="path to the toml file for the manual settings (default: manual.toml)")
+    parser.add_argument("TOML", help="path to the toml file for the manual settings (default: manual.toml)", nargs='?', default="")
 
     parser.add_argument("TOPICS", nargs='*',
                         help="List of topics that should be visible in the course manual for the students (see also manual.toml). "
@@ -84,14 +84,20 @@ def cli():
 
     args = vars(parser.parse_args())
 
-    settings = Settings(args["TOML"])
-    if settings.is_defined():
-        print(f"Using settings: {settings.fl_name}")
-
     if args["usage"]:
         parser.print_usage()
         print("\n" + USAGE)
         exit()
+
+    if len(args["TOML"]) < 2:
+        print("No TOML file specified.")
+        parser.print_help()
+        exit()
+
+    settings = Settings(args["TOML"])
+    if settings.is_defined():
+        print(f"Using settings: {settings.fl_name}")
+
 
     if args["overview"]:
         fld = course_overview(settings, "overview.md")
