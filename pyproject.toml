@@ -1,0 +1,15 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "manufy"
+authors = [{name = "Oliver Lindemann", email = "lindemann@essb.eur.nl"}]
+license = {file = "LICENSE"}
+classifiers = ["License :: OSI Approved :: MIT License"]
+dynamic = ["version", "description"]
+requires-python = ">=3.11"
+dependencies =  []
+
+[project.scripts]
+manufy = "manufy.__main__:cli"
