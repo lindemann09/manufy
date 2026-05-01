@@ -3,7 +3,7 @@
 Oliver Lindemann
 """
 
-__version__ = "0.9.0"
+__version__ = "0.9.1"
 __author__ = "Oliver Lindemann"
 
 import sys as _sys

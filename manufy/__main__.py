@@ -42,8 +42,11 @@ def render(folder, to_pdf: bool = False):
     if to_pdf:
         cmd.extend(["--to", "pdf"])
     print(f"Render with Quarto: {' '.join(cmd)}")
-    subprocess.run(cmd, check=True)
-
+    try:
+        subprocess.run(cmd, check=True)
+    except subprocess.CalledProcessError as e:
+        print(e.output)
+        raise RuntimeError("Rendering with Quarto failed. Please check the output above for details.")
 
 def cli():
     parser = argparse.ArgumentParser(
