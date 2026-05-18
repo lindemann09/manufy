@@ -7,10 +7,10 @@ from .settings import Settings
 LEARNING_GOALS = "Learning Objectives"
 STUDY_CHECKLIST = "Study Checklist"
 
-def tutor_instructions(settings: Settings) -> Path:
+def tutor_instructions(settings: Settings, develop_mode: bool=False) -> Path:
     """processes the qmd files in the docs folder"""
 
-    return course_manual(settings,tutor_instr=True, develop_mode=False)
+    return course_manual(settings, tutor_instr=True, develop_mode=develop_mode)
 
 
 def course_manual(settings: Settings,

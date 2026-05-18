@@ -108,18 +108,17 @@ def cli():
             render(fld, to_pdf=True)
         exit()
 
-    if args["develop"]:
-        course_manual(settings, tm_visible=[''], develop_mode=True)
-        exit()
-
     if not args["course_only"]:
-        fld = tutor_instructions(settings)
+        fld = tutor_instructions(settings, develop_mode=args["develop"])
         if args["render"]:
             render(fld, to_pdf=True)
 
     if not args["instructions_only"]:
-        tm_visible = list(settings.get("tm_visible", []))
-        fld = course_manual(settings, tm_visible=tm_visible)
+        if args["develop"]:
+            fld = course_manual(settings, tm_visible=[''], develop_mode=True)
+        else:
+            tm_visible = list(settings.get("tm_visible", []))
+            fld = course_manual(settings, tm_visible=tm_visible)
         if args["render"]:
             render(fld, to_pdf=False)
 
